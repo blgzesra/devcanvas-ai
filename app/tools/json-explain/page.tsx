@@ -21,7 +21,7 @@ export default function JsonExplainPage() {
   "isStudent": true
 }`;
 
-  function handleExplain() {
+  async function handleExplain() {
     if (!jsonInput.trim()) return;
 
     try {
@@ -33,16 +33,29 @@ export default function JsonExplainPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResponse(`JSON received successfully.
+    try {
+      const res = await fetch("/api/explain-json", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          json: jsonInput,
+        }),
+      });
 
-AI Analysis (Demo)
+      const data = await res.json();
 
-• Your JSON is valid.
-• The AI will analyze each field.
-• OpenAI integration will provide real explanations later.`);
+      if (!res.ok) {
+        setResponse(data.error || "Something went wrong.");
+      } else {
+        setResponse(data.result);
+      }
+    } catch {
+      setResponse("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   }
 
   function handleClear() {
@@ -122,14 +135,15 @@ AI Analysis (Demo)
           </div>
 
         </div>
-<ToolResult
-  title="AI Response"
-  content={
-    response ||
-    "Your AI explanation will appear here."
-  }
-  hasResult={!!response}
-/>
+
+        <ToolResult
+          title="AI Response"
+          content={
+            response ||
+            "Your AI explanation will appear here."
+          }
+          hasResult={!!response}
+        />
 
       </div>
     </main>
