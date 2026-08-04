@@ -25,9 +25,10 @@ export default function RegexGeneratorPage() {
 /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}/
 
 Explanation:
-This regular expression matches most valid email addresses.
 
-⚠️ Demo response. OpenAI integration will be added later.`);
+• Matches most valid email addresses.
+• Supports usernames with dots, underscores and special characters.
+• OpenAI integration will generate custom regex patterns later.`);
       setLoading(false);
     }, 1200);
   }
@@ -47,6 +48,7 @@ This regular expression matches most valid email addresses.
         />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -55,10 +57,11 @@ This regular expression matches most valid email addresses.
           />
 
           <div className="mt-6 flex flex-wrap gap-4">
+
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Generating..." : "Generate Regex"}
             </button>
@@ -76,13 +79,19 @@ This regular expression matches most valid email addresses.
             >
               Clear
             </button>
+
           </div>
+
         </div>
 
         <ToolResult
-          title="Generated Regex"
-          content={result || "Generated regex will appear here..."}
-        />
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>

@@ -42,7 +42,9 @@ ${description}
 - Tailwind CSS
 - TypeScript
 
-⚠️ Demo README. OpenAI integration will generate dynamic content later.`);
+⚠️ Demo README.
+
+OpenAI integration will generate a complete README automatically.`);
       setLoading(false);
     }, 1200);
   }
@@ -58,7 +60,7 @@ ${description}
 
         <ToolHeader
           title="README Generator"
-          description="Write a repository description and generate a README."
+          description="Write a repository description and generate a professional README."
         />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -75,7 +77,7 @@ ${description}
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Generating..." : "Generate README"}
             </button>
@@ -98,10 +100,14 @@ ${description}
 
         </div>
 
-        <ToolResult
-          title="Generated README"
-          content={result || "Your generated README will appear here..."}
-        />
+      <ToolResult
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>

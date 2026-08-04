@@ -31,9 +31,9 @@ export default function MarkdownGeneratorPage() {
 
 AI Enhancement (Demo)
 
-• Markdown structure looks good.
-• AI can improve formatting.
-• OpenAI integration will be enabled later.`);
+• Your markdown structure is valid.
+• AI can improve formatting and readability.
+• OpenAI integration will provide enhanced markdown later.`);
       setLoading(false);
     }, 1200);
   }
@@ -66,7 +66,7 @@ AI Enhancement (Demo)
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Processing..." : "Improve with AI"}
             </button>
@@ -89,10 +89,14 @@ AI Enhancement (Demo)
 
         </div>
 
-        <ToolResult
-          title="AI Response"
-          content={result || "AI response will appear here..."}
-        />
+<ToolResult
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>

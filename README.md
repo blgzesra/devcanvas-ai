@@ -1,36 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 DevCanvas AI
 
-## Getting Started
+Modern AI-powered developer toolkit built with **Next.js**, **React**, **TypeScript** and **Tailwind CSS**.
 
-First, run the development server:
+DevCanvas AI provides a collection of developer tools designed to simplify common development tasks through a clean, fast and responsive interface.
+
+> ⚠️ **Current Status**
+>
+> This is the first stable release (**v1.0**).
+> AI responses are currently demo content. OpenAI integration is planned for a future release.
+
+---
+
+# ✨ Features
+
+- 🧠 JSON Explain
+- 🔍 Regex Generator
+- 📝 Markdown Generator
+- 📄 README Generator
+- 🌿 Git Commit Generator
+- 🎨 Color Palette Generator
+- 👥 Fake Data Generator
+- ⚡ API Mock Generator
+
+Additional features:
+
+- ⭐ Favorite tools (LocalStorage)
+- 🔎 Search
+- 🗂 Category filtering
+- 🌙 Dark UI
+- 📱 Fully Responsive
+- 📋 Copy to Clipboard
+- ⚡ Fast Next.js App Router architecture
+- 🔍 SEO Optimized
+
+---
+
+# 🛠 Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- App Router
+- LocalStorage
+
+---
+
+# 📸 Screenshots
+
+> Screenshots will be added soon.
+
+## Landing Page
+
+![Landing](public/screenshots/landing.png)
+
+---
+
+## Dashboard
+
+![Dashboard](public/screenshots/dashboard.png)
+
+---
+
+## JSON Explain
+
+![JSON Explain](public/screenshots/json-explain.png)
+
+---
+
+## Regex Generator
+
+![Regex Generator](public/screenshots/regex-generator.png)
+
+---
+
+## Color Palette Generator
+
+![Color Palette](public/screenshots/color-palette.png)
+
+---
+
+## API Mock Generator
+
+![API Mock](public/screenshots/api-mock.png)
+
+---
+
+# 🚀 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/devcanvas-ai.git
+```
+
+Go to the project
+
+```bash
+cd devcanvas-ai
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Start production server
 
-## Learn More
+```bash
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 📂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+components/
+lib/
+public/
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 📈 Project Status
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+✅ Landing Page
+
+✅ Dashboard
+
+✅ Responsive Design
+
+✅ Search
+
+✅ Favorites
+
+✅ Category Filter
+
+✅ SEO
+
+✅ Production Build
+
+⏳ OpenAI Integration (Planned)
+
+---
+
+# 🗺 Roadmap
+
+### Version 1.0
+
+- ✅ Developer tools
+- ✅ Responsive UI
+- ✅ Dashboard
+- ✅ Production ready
+- ✅ SEO optimization
+
+### Future
+
+- 🔜 OpenAI integration
+- 🔜 AI-powered responses
+- 🔜 Additional developer tools
+
+---
+
+# 👩‍💻 Author
+
+**Esra Bilgiz**
+
+Software Developer
+
+---
+
+# 📄 License
+
+MIT License

@@ -21,13 +21,15 @@ export default function FakeDataGeneratorPage() {
     setLoading(true);
 
     setTimeout(() => {
-      setResult(`Name: John Doe
+      setResult(`Fake Data Generated (Demo)
+
+Name: John Doe
 Email: john@example.com
 Company: DevCanvas Labs
 Address: 123 Main Street
 
-⚠️ Demo response.
-OpenAI integration will generate dynamic fake data later.`);
+• AI can generate realistic names, emails and addresses.
+• OpenAI integration will generate dynamic fake data automatically.`);
       setLoading(false);
     }, 1200);
   }
@@ -43,7 +45,7 @@ OpenAI integration will generate dynamic fake data later.`);
 
         <ToolHeader
           title="Fake Data Generator"
-          description="Generate fake names, emails, companies and addresses."
+          description="Generate realistic fake names, emails, companies and addresses."
         />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -60,7 +62,7 @@ OpenAI integration will generate dynamic fake data later.`);
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Generating..." : "Generate Fake Data"}
             </button>
@@ -83,10 +85,14 @@ OpenAI integration will generate dynamic fake data later.`);
 
         </div>
 
-        <ToolResult
-          title="Generated Data"
-          content={result || "Generated fake data will appear here..."}
-        />
+      <ToolResult
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>

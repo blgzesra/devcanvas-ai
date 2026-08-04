@@ -25,8 +25,11 @@ Updated README`;
     setTimeout(() => {
       setResult(`feat: improve project structure
 
-⚠️ Demo commit message.
-OpenAI integration will generate Conventional Commits later.`);
+Conventional Commit (Demo)
+
+• Uses the "feat" commit type.
+• Summarizes the implemented changes.
+• OpenAI integration will generate accurate Conventional Commits automatically.`);
       setLoading(false);
     }, 1200);
   }
@@ -42,7 +45,7 @@ OpenAI integration will generate Conventional Commits later.`);
 
         <ToolHeader
           title="Git Commit Generator"
-          description="Describe your changes and generate a commit message."
+          description="Describe your changes and generate a Conventional Commit message."
         />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -59,7 +62,7 @@ OpenAI integration will generate Conventional Commits later.`);
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Generating..." : "Generate Commit"}
             </button>
@@ -82,10 +85,14 @@ OpenAI integration will generate Conventional Commits later.`);
 
         </div>
 
-        <ToolResult
-          title="Generated Commit"
-          content={result || "Generated commit message will appear here..."}
-        />
+       <ToolResult
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>

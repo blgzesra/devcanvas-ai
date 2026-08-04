@@ -120,7 +120,7 @@ export default function DashboardPage() {
             AI Tools
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid items-stretch gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {filteredTools.map((tool) => (
               <ToolCard
                 key={tool.title}

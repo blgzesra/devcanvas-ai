@@ -21,15 +21,17 @@ export default function ApiMockGeneratorPage() {
     setLoading(true);
 
     setTimeout(() => {
-      setResult(`{
+      setResult(`Mock API Generated (Demo)
+
+{
   "id": 1,
   "name": "John Doe",
   "email": "john@example.com",
   "role": "Admin"
 }
 
-⚠️ Demo response.
-OpenAI integration will generate realistic mock APIs later.`);
+• AI can generate realistic JSON structures.
+• OpenAI integration will generate dynamic mock APIs automatically.`);
       setLoading(false);
     }, 1200);
   }
@@ -45,7 +47,7 @@ OpenAI integration will generate realistic mock APIs later.`);
 
         <ToolHeader
           title="API Mock Generator"
-          description="Describe an API and generate a mock JSON response."
+          description="Describe an API and generate a realistic mock JSON response."
         />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -62,7 +64,7 @@ OpenAI integration will generate realistic mock APIs later.`);
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Generating..." : "Generate Mock API"}
             </button>
@@ -85,10 +87,14 @@ OpenAI integration will generate realistic mock APIs later.`);
 
         </div>
 
-        <ToolResult
-          title="Generated JSON"
-          content={result || "Generated mock API response will appear here..."}
-        />
+      <ToolResult
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>

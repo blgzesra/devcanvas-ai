@@ -5,24 +5,30 @@ import { useState } from "react";
 type ToolResultProps = {
   title: string;
   content: string;
+  hasResult: boolean;
 };
 
 export default function ToolResult({
   title,
   content,
+  hasResult,
 }: ToolResultProps) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
-    if (!content) return;
+    if (!hasResult) return;
 
-    await navigator.clipboard.writeText(content);
+    try {
+      await navigator.clipboard.writeText(content);
 
-    setCopied(true);
+      setCopied(true);
 
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch {
+      console.error("Failed to copy.");
+    }
   }
 
   return (
@@ -34,7 +40,12 @@ export default function ToolResult({
 
         <button
           onClick={handleCopy}
-          className="rounded-lg border border-zinc-700 px-4 py-2 text-sm transition hover:bg-zinc-800"
+          disabled={!hasResult}
+          className={`rounded-lg border px-4 py-2 text-sm transition ${
+            hasResult
+              ? "border-zinc-700 hover:bg-zinc-800"
+              : "cursor-not-allowed border-zinc-800 text-zinc-600"
+          }`}
         >
           {copied ? "✅ Copied!" : "📋 Copy"}
         </button>

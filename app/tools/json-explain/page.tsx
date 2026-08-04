@@ -36,11 +36,11 @@ export default function JsonExplainPage() {
     setTimeout(() => {
       setResponse(`JSON received successfully.
 
-AI analysis (Demo)
+AI Analysis (Demo)
 
 • Your JSON is valid.
 • The AI will analyze each field.
-• In the next step this response will come from OpenAI.`);
+• OpenAI integration will provide real explanations later.`);
       setLoading(false);
     }, 1500);
   }
@@ -51,20 +51,20 @@ AI analysis (Demo)
   }
 
   function handleFileUpload(
-  event: React.ChangeEvent<HTMLInputElement>
-) {
-  const file = event.target.files?.[0];
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const file = event.target.files?.[0];
 
-  if (!file) return;
+    if (!file) return;
 
-  const reader = new FileReader();
+    const reader = new FileReader();
 
-  reader.onload = (e) => {
-    setJsonInput(e.target?.result as string);
-  };
+    reader.onload = (e) => {
+      setJsonInput(e.target?.result as string);
+    };
 
-  reader.readAsText(file);
-}
+    reader.readAsText(file);
+  }
 
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-white">
@@ -76,6 +76,7 @@ AI analysis (Demo)
         />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+
           <textarea
             value={jsonInput}
             onChange={(e) => setJsonInput(e.target.value)}
@@ -84,10 +85,11 @@ AI analysis (Demo)
           />
 
           <div className="mt-6 flex flex-wrap gap-4">
+
             <button
               onClick={handleExplain}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Analyzing..." : "Explain with AI"}
             </button>
@@ -99,32 +101,35 @@ AI analysis (Demo)
               Load Example
             </button>
 
+            <label className="cursor-pointer rounded-xl border border-zinc-700 px-6 py-3 transition hover:bg-zinc-800">
+              📁 Upload JSON
+
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+            </label>
+
             <button
               onClick={handleClear}
               className="rounded-xl border border-red-700 px-6 py-3 text-red-400 transition hover:bg-red-900/20"
             >
               Clear
             </button>
+
           </div>
+
         </div>
-
-       <div className="mt-4">
-  <label className="inline-flex cursor-pointer items-center rounded-xl border border-zinc-700 px-5 py-3 transition hover:bg-zinc-800">
-    📁 Upload JSON
-
-    <input
-      type="file"
-      accept=".json"
-      onChange={handleFileUpload}
-      className="hidden"
-    />
-  </label>
-</div>
-
-        <ToolResult
-          title="AI Response"
-          content={response || "AI explanation will appear here..."}
-        />
+<ToolResult
+  title="AI Response"
+  content={
+    response ||
+    "Your AI explanation will appear here."
+  }
+  hasResult={!!response}
+/>
 
       </div>
     </main>

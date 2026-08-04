@@ -64,8 +64,7 @@ OpenAI integration will generate dynamic palettes later.`);
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500 disabled:opacity-50"
-            >
+className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)]"            >
               {loading ? "Generating..." : "Generate Palette"}
             </button>
 
@@ -87,10 +86,14 @@ OpenAI integration will generate dynamic palettes later.`);
 
         </div>
 
-        <ToolResult
-          title="Generated Palette"
-          content={result || "Generated color palette will appear here..."}
-        />
+      <ToolResult
+  title="Generated Regex"
+  content={
+    result ||
+    "Your AI-generated regular expression will appear here."
+  }
+  hasResult={!!result}
+/>
 
       </div>
     </main>
