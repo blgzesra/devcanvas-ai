@@ -1,30 +1,40 @@
+import Link from "next/link";
+
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/sections/Hero";
+import FeaturedTools from "@/components/sections/FeaturedTools";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-white">
-      <section className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 text-center">
-        <span className="mb-4 rounded-full border border-zinc-800 bg-zinc-900 px-4 py-1 text-sm text-zinc-400">
-          AI-Powered Developer Toolkit
-        </span>
 
-        <h1 className="max-w-4xl text-5xl font-bold tracking-tight md:text-7xl">
-          DevCanvas AI
-        </h1>
+      <Navbar />
 
-        <p className="mt-6 max-w-2xl text-lg text-zinc-400 md:text-xl">
-          Modern AI tools for developers. Generate regex, explain JSON,
-          create README files, build Tailwind classes and more.
-        </p>
+      <Hero />
 
-        <div className="mt-10 flex gap-4">
-          <button className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition hover:bg-blue-500">
-            Explore Tools
-          </button>
+      <FeaturedTools />
 
-          <button className="rounded-xl border border-zinc-700 px-6 py-3 transition hover:bg-zinc-900">
-            GitHub
-          </button>
+      <section className="border-t border-zinc-800 py-24">
+        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 text-center">
+
+          <h2 className="text-4xl font-bold">
+            Ready to boost your development workflow?
+          </h2>
+
+          <p className="mt-4 max-w-2xl text-zinc-400">
+            Explore AI-powered developer tools built for productivity.
+          </p>
+
+          <Link
+            href="/dashboard"
+            className="mt-10 rounded-xl bg-blue-600 px-8 py-4 font-semibold transition hover:bg-blue-500"
+          >
+            Get Started
+          </Link>
+
         </div>
       </section>
+
     </main>
   );
 }

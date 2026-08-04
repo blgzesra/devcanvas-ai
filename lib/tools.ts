@@ -1,0 +1,58 @@
+export const tools = [
+  {
+    title: "JSON Explain",
+    description: "Explain complex JSON structures with AI.",
+    icon: "🧠",
+    href: "/tools/json-explain",
+    category: "JSON",
+  },
+  {
+    title: "Regex Generator",
+    description: "Generate regex patterns from plain English.",
+    icon: "🔍",
+    href: "/tools/regex-generator",
+    category: "Regex",
+  },
+  {
+    title: "Markdown Generator",
+    description: "Improve markdown with AI.",
+    icon: "📝",
+    href: "/tools/markdown-generator",
+    category: "Markdown",
+  },
+  {
+    title: "README Generator",
+    description: "Generate professional README files.",
+    icon: "📄",
+    href: "/tools/readme-generator",
+    category: "Documentation",
+  },
+  {
+    title: "Git Commit Generator",
+    description: "Generate Conventional Commit messages.",
+    icon: "🌿",
+    href: "/tools/git-commit-generator",
+    category: "Git",
+  },
+  {
+    title: "Color Palette Generator",
+    description: "Generate color palettes from a theme.",
+    icon: "🎨",
+    href: "/tools/color-palette-generator",
+    category: "Design",
+  },
+  {
+    title: "Fake Data Generator",
+    description: "Generate fake names, emails and addresses.",
+    icon: "👥",
+    href: "/tools/fake-data-generator",
+    category: "Data",
+  },
+  {
+    title: "API Mock Generator",
+    description: "Generate realistic mock API responses.",
+    icon: "⚡",
+    href: "/tools/api-mock-generator",
+    category: "API",
+  },
+];
