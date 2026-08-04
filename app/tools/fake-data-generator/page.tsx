@@ -12,7 +12,7 @@ export default function FakeDataGeneratorPage() {
 
   const examplePrompt = "Generate 5 fake users";
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!prompt.trim()) {
       setResult("⚠️ Please describe the fake data you need.");
       return;
@@ -20,18 +20,29 @@ export default function FakeDataGeneratorPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`Fake Data Generated (Demo)
+    try {
+      const res = await fetch("/api/fake-data-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
 
-Name: John Doe
-Email: john@example.com
-Company: DevCanvas Labs
-Address: 123 Main Street
+      const data = await res.json();
 
-• AI can generate realistic names, emails and addresses.
-• OpenAI integration will generate dynamic fake data automatically.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {

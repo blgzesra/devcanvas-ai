@@ -18,7 +18,7 @@ export default function MarkdownGeneratorPage() {
 - Regex Generator
 - Markdown Generator`;
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!markdown.trim()) {
       setResult("⚠️ Please enter some markdown.");
       return;
@@ -26,16 +26,29 @@ export default function MarkdownGeneratorPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`Markdown processed successfully.
+    try {
+      const res = await fetch("/api/markdown-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          markdown,
+        }),
+      });
 
-AI Enhancement (Demo)
+      const data = await res.json();
 
-• Your markdown structure is valid.
-• AI can improve formatting and readability.
-• OpenAI integration will provide enhanced markdown later.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {

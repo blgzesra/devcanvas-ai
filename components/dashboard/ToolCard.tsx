@@ -19,11 +19,15 @@ export default function ToolCard({
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    const favorites: string[] = JSON.parse(
-      localStorage.getItem("favorite-tools") || "[]"
-    );
+    try {
+      const favorites: string[] = JSON.parse(
+        localStorage.getItem("favorite-tools") || "[]"
+      );
 
-    setFavorite(favorites.includes(title));
+      setFavorite(favorites.includes(title));
+    } catch {
+      setFavorite(false);
+    }
   }, [title]);
 
   function toggleFavorite(
@@ -50,7 +54,8 @@ export default function ToolCard({
   return (
     <Link
       href={href}
-className="group relative flex h-[340px] flex-col rounded-2xl border border-zinc-800 bg-zinc-900/50 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-zinc-900 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)]"    >
+      className="group relative flex h-[340px] flex-col rounded-2xl border border-zinc-800 bg-zinc-900/50 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-zinc-900 hover:shadow-[0_0_35px_rgba(37,99,235,0.18)]"
+    >
       <button
         onClick={toggleFavorite}
         className="absolute right-5 top-5 text-xl transition hover:scale-110"

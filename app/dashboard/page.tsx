@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import ToolCard from "@/components/dashboard/ToolCard";
@@ -11,15 +11,17 @@ export default function DashboardPage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favorites] = useState<string[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
-  useEffect(() => {
-    const saved = JSON.parse(
-      localStorage.getItem("favorite-tools") || "[]"
-    );
-
-    setFavorites(saved);
-  }, []);
+    try {
+      return JSON.parse(localStorage.getItem("favorite-tools") || "[]");
+    } catch {
+      return [];
+    }
+  });
 
   const categories = [
     "All",

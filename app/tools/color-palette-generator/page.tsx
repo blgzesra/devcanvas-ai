@@ -12,7 +12,7 @@ export default function ColorPaletteGeneratorPage() {
 
   const exampleTheme = "Fintech Startup";
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!theme.trim()) {
       setResult("⚠️ Please enter a theme.");
       return;
@@ -20,20 +20,29 @@ export default function ColorPaletteGeneratorPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`Theme:
-${theme}
+    try {
+      const res = await fetch("/api/color-palette-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          theme,
+        }),
+      });
 
-Primary: #2563EB
-Secondary: #06B6D4
-Accent: #14B8A6
-Background: #0F172A
-Text: #F8FAFC
+      const data = await res.json();
 
-⚠️ Demo palette.
-OpenAI integration will generate dynamic palettes later.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {

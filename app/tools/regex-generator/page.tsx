@@ -12,7 +12,7 @@ export default function RegexGeneratorPage() {
 
   const examplePrompt = "Match all valid email addresses";
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!prompt.trim()) {
       setResult("⚠️ Please describe the regex you want to generate.");
       return;
@@ -20,17 +20,29 @@ export default function RegexGeneratorPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`Regex:
-/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}/
+    try {
+      const res = await fetch("/api/regex-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
 
-Explanation:
+      const data = await res.json();
 
-• Matches most valid email addresses.
-• Supports usernames with dots, underscores and special characters.
-• OpenAI integration will generate custom regex patterns later.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {

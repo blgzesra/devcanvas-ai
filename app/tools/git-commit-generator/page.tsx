@@ -14,7 +14,7 @@ export default function GitCommitGeneratorPage() {
 Fixed navbar responsiveness
 Updated README`;
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!changes.trim()) {
       setResult("⚠️ Please describe your changes.");
       return;
@@ -22,16 +22,29 @@ Updated README`;
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`feat: improve project structure
+    try {
+      const res = await fetch("/api/git-commit-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          changes,
+        }),
+      });
 
-Conventional Commit (Demo)
+      const data = await res.json();
 
-• Uses the "feat" commit type.
-• Summarizes the implemented changes.
-• OpenAI integration will generate accurate Conventional Commits automatically.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {

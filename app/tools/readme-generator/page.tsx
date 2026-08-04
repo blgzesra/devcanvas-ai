@@ -13,7 +13,7 @@ export default function ReadmeGeneratorPage() {
   const exampleDescription =
     "An AI-powered developer toolkit built with Next.js, React and Tailwind CSS.";
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!description.trim()) {
       setResult("⚠️ Please enter a repository description.");
       return;
@@ -21,32 +21,29 @@ export default function ReadmeGeneratorPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`# DevCanvas AI
+    try {
+      const res = await fetch("/api/readme-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          description,
+        }),
+      });
 
-## Description
+      const data = await res.json();
 
-${description}
-
-## Features
-
-- AI Developer Tools
-- JSON Explain
-- Regex Generator
-- Markdown Generator
-
-## Tech Stack
-
-- Next.js
-- React
-- Tailwind CSS
-- TypeScript
-
-⚠️ Demo README.
-
-OpenAI integration will generate a complete README automatically.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {

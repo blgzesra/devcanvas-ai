@@ -12,7 +12,7 @@ export default function ApiMockGeneratorPage() {
 
   const examplePrompt = "User API";
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!prompt.trim()) {
       setResult("⚠️ Please describe the API.");
       return;
@@ -20,20 +20,29 @@ export default function ApiMockGeneratorPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setResult(`Mock API Generated (Demo)
+    try {
+      const res = await fetch("/api/api-mock-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
 
-{
-  "id": 1,
-  "name": "John Doe",
-  "email": "john@example.com",
-  "role": "Admin"
-}
+      const data = await res.json();
 
-• AI can generate realistic JSON structures.
-• OpenAI integration will generate dynamic mock APIs automatically.`);
+      if (!res.ok) {
+        setResult(data.error || "Something went wrong.");
+      } else {
+        setResult(data.result);
+      }
+    } catch {
+      setResult("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
   }
 
   function handleClear() {
