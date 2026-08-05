@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import { AI_MODEL } from "../../../lib/ai";
 
 const client = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -22,12 +23,14 @@ export async function POST(req: Request) {
     }
 
     const response = await client.chat.completions.create({
-      model: "qwen/qwen3-coder:free",
+      model: AI_MODEL,
+      temperature: 0.3,
+      max_tokens: 300,
       messages: [
         {
           role: "system",
           content:
-            "You are a backend API designer. Generate a realistic JSON API response for the described endpoint, including realistic data structure, sample payloads, status codes, and field names. Return only valid JSON, no markdown fences, no explanation.",
+            "Generate a realistic JSON API mock for the described endpoint. Return valid JSON only.",
         },
         {
           role: "user",

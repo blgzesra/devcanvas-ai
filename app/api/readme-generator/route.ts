@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import { AI_MODEL } from "../../../lib/ai";
 
 const client = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -22,12 +23,14 @@ export async function POST(req: Request) {
     }
 
     const response = await client.chat.completions.create({
-      model: "qwen/qwen3-coder:free",
+      model: AI_MODEL,
+      temperature: 0.3,
+      max_tokens: 500,
       messages: [
         {
           role: "system",
           content:
-            "You are a senior technical writer and developer. Generate a polished, professional README for a software project based on the user's description. Include sections such as Overview, Features, Tech Stack, Getting Started, Usage, and Project Structure when relevant. Return only the README content in Markdown.",
+            "Write a polished README in Markdown for the project description. Include useful sections only when relevant.",
         },
         {
           role: "user",

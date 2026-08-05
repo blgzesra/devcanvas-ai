@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import { AI_MODEL } from "../../../lib/ai";
 
 const client = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -22,12 +23,13 @@ export async function POST(req: Request) {
     }
 
     const response = await client.chat.completions.create({
-      model: "qwen/qwen3-coder:free",
+      model: AI_MODEL,
+      temperature: 0.3,
+      max_tokens: 300,
       messages: [
         {
           role: "system",
-          content:
-            "You are a senior software engineer. Generate a precise regex pattern for the user's requirement. Explain the pattern in a developer-friendly way with examples when helpful. Return the regex and a clear explanation.",
+          content: "Generate a precise regex and brief developer-friendly explanation.",
         },
         {
           role: "user",

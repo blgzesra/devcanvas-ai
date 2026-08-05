@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import { AI_MODEL } from "../../../lib/ai";
 
 const client = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -22,12 +23,14 @@ export async function POST(req: Request) {
     }
 
     const response = await client.chat.completions.create({
-      model: "qwen/qwen3-coder:free",
+      model: AI_MODEL,
+      temperature: 0.3,
+      max_tokens: 300,
       messages: [
         {
           role: "system",
           content:
-            "You are a senior software engineer. Generate a Conventional Commit message for the described changes. Return only a concise commit message with a valid type and short summary. Prefer types like feat, fix, docs, refactor, chore, style, perf, test, build, ci. If needed, include a short body after a blank line.",
+            "Write a concise Conventional Commit message. Use a valid type and brief summary.",
         },
         {
           role: "user",

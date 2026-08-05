@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import { AI_MODEL } from "../../../lib/ai";
 
 const client = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -22,12 +23,14 @@ export async function POST(req: Request) {
     }
 
     const response = await client.chat.completions.create({
-      model: "qwen/qwen3-coder:free",
+      model: AI_MODEL,
+      temperature: 0.3,
+      max_tokens: 300,
       messages: [
         {
           role: "system",
           content:
-            "You are a data generation specialist. Generate realistic fake user data based on the user's request. Include realistic names, emails, addresses, phone numbers, companies, roles, and other relevant fields. Return clean, readable JSON or structured data that is easy to copy into a mock dataset.",
+            "Generate realistic mock data in valid JSON for the request. Include common fields like names, emails, and IDs when relevant.",
         },
         {
           role: "user",
