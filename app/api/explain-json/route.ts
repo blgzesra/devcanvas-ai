@@ -10,8 +10,19 @@ export async function POST(req: Request) {
   try {
     const { json } = await req.json();
 
+    if (!json || typeof json !== "string") {
+      return NextResponse.json(
+        {
+          error: "JSON is required.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     const response = await client.chat.completions.create({
-      model: "deepseek/deepseek-chat-v3.1:free",
+      model: "qwen/qwen3-coder:free",
       messages: [
         {
           role: "system",
@@ -26,14 +37,23 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({
-      result: response.choices[0].message.content,
+      result: response.choices[0]?.message?.content ?? "No response.",
     });
-  } catch (error) {
-    console.error(error);
+  } catch (error: unknown) {
+    console.error("OPENROUTER ERROR:", error);
+
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : typeof error === "object" && error !== null && "message" in error
+          ? String((error as { message?: unknown }).message)
+          : typeof error === "string"
+            ? error
+            : JSON.stringify(error, null, 2);
 
     return NextResponse.json(
       {
-        error: "Something went wrong.",
+        error: errorMessage,
       },
       {
         status: 500,

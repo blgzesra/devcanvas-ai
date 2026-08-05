@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     }
 
     const response = await client.chat.completions.create({
-      model: "deepseek/deepseek-chat-v3.1:free",
+      model: "qwen/qwen3-coder:free",
       messages: [
         {
           role: "system",

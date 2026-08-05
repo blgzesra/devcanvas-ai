@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Props = {
   title: string;
@@ -16,19 +16,21 @@ export default function ToolCard({
   icon,
   href,
 }: Props) {
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState<boolean>(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
 
-  useEffect(() => {
     try {
       const favorites: string[] = JSON.parse(
         localStorage.getItem("favorite-tools") || "[]"
       );
 
-      setFavorite(favorites.includes(title));
+      return favorites.includes(title);
     } catch {
-      setFavorite(false);
+      return false;
     }
-  }, [title]);
+  });
 
   function toggleFavorite(
     e: React.MouseEvent<HTMLButtonElement>
