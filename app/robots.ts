@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
 
-    sitemap: "https://devcanvas-ai.vercel.app/sitemap.xml",
+    sitemap: "https://devcanvas-ai-f4po.vercel.app/sitemap.xml",
   };
 }

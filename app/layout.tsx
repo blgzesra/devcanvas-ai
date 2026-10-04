@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devcanvas-ai.vercel.app"),
+  metadataBase: new URL("https://devcanvas-ai-f4po.vercel.app"),
 
   title: {
     default: "DevCanvas AI",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "DevCanvas AI",
     description:
       "AI-powered developer toolkit for modern developers.",
-    url: "https://devcanvas-ai.vercel.app",
+    url: "https://devcanvas-ai-f4po.vercel.app",
     siteName: "DevCanvas AI",
     locale: "en_US",
     type: "website",

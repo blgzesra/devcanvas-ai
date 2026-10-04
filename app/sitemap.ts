@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://devcanvas-ai.vercel.app";
+  const baseUrl = "https://devcanvas-ai-f4po.vercel.app";
 
   return [
     {
