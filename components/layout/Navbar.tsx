@@ -22,7 +22,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="https://github.com/"
+            href="https://github.com/blgzesra/devcanvas-ai"
             target="_blank"
             rel="noopener noreferrer"
             className="transition hover:text-white"

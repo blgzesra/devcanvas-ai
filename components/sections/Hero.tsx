@@ -27,7 +27,7 @@ export default function Hero() {
         </Link>
 
         <a
-          href="https://github.com/"
+          href="https://github.com/blgzesra/devcanvas-ai"
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-xl border border-zinc-700 px-6 py-3 transition hover:bg-zinc-900"
