@@ -40,7 +40,7 @@ An AI-powered developer toolkit with eight focused tools — JSON explainer, reg
 - **Framework:** Next.js 16 (App Router, Route Handlers), React 19
 - **Language:** TypeScript 5
 - **Styling:** Tailwind CSS 4
-- **AI:** [OpenAI Node SDK](https://github.com/openai/openai-node) pointed at [OpenRouter](https://openrouter.ai)'s OpenAI-compatible API — default model `openrouter/free`, configurable in [`lib/ai.ts`](lib/ai.ts)
+- **AI:** [OpenAI Node SDK](https://github.com/openai/openai-node) pointed at [OpenRouter](https://openrouter.ai)'s OpenAI-compatible API — default model `openrouter/free` (a router that picks a free model for each request), configurable in [`lib/ai.ts`](lib/ai.ts)
 - **Tooling:** ESLint 9 (`eslint-config-next`)
 - **Hosting:** Vercel
 
@@ -143,7 +143,9 @@ docs/screenshots/         # README images
 - **No streaming:** responses arrive in one piece after the model finishes.
 - **Output length is capped** per tool (800–1500 `max_tokens`); when a response hits the cap, the UI flags it as cut off rather than silently truncating.
 - **Plain-text output:** results are not rendered as Markdown and code is not syntax-highlighted (palettes are the exception).
-- **Free model tier:** `openrouter/free` can be rate-limited and output quality varies between requests.
+- **Model varies per request:** `openrouter/free` sends each request to one of the currently available free models, so output quality and style can change between requests.
+- **Reasoning can use up the token budget:** some free models spend part or all of `max_tokens` on reasoning, which can produce a cut-off or empty answer. The UI shows an explicit message in both cases instead of failing silently.
+- **Shared daily quota on the live demo:** OpenRouter limits free models per API key (20 requests/minute and a small daily cap), and every demo visitor shares the same key, so the demo may return errors once the daily quota is used up.
 - **No rate limiting or authentication** on the API routes.
 - **Favorites are per-browser**, stored in `localStorage`.
 - **No automated tests** yet.
