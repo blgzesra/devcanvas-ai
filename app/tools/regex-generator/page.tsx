@@ -97,13 +97,13 @@ export default function RegexGeneratorPage() {
         </div>
 
         <ToolResult
-  title="Generated Regex"
-  content={
-    result ||
-    "Your AI-generated regular expression will appear here."
-  }
-  hasResult={!!result}
-/>
+          title="Generated Regex"
+          content={
+            result ||
+            "Your AI-generated regular expression will appear here."
+          }
+          hasResult={!!result}
+        />
 
       </div>
     </main>

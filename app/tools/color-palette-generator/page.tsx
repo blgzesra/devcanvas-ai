@@ -95,14 +95,14 @@ className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duratio
 
         </div>
 
-      <ToolResult
-  title="Generated Regex"
-  content={
-    result ||
-    "Your AI-generated regular expression will appear here."
-  }
-  hasResult={!!result}
-/>
+        <ToolResult
+          title="Generated Palette"
+          content={
+            result ||
+            "Your AI-generated color palette will appear here."
+          }
+          hasResult={!!result}
+        />
 
       </div>
     </main>

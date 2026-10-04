@@ -98,14 +98,14 @@ Updated README`;
 
         </div>
 
-       <ToolResult
-  title="Generated Regex"
-  content={
-    result ||
-    "Your AI-generated regular expression will appear here."
-  }
-  hasResult={!!result}
-/>
+        <ToolResult
+          title="Generated Commit Message"
+          content={
+            result ||
+            "Your AI-generated commit message will appear here."
+          }
+          hasResult={!!result}
+        />
 
       </div>
     </main>

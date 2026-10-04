@@ -96,14 +96,14 @@ export default function ApiMockGeneratorPage() {
 
         </div>
 
-      <ToolResult
-  title="Generated Regex"
-  content={
-    result ||
-    "Your AI-generated regular expression will appear here."
-  }
-  hasResult={!!result}
-/>
+        <ToolResult
+          title="Generated Mock API"
+          content={
+            result ||
+            "Your AI-generated mock API response will appear here."
+          }
+          hasResult={!!result}
+        />
 
       </div>
     </main>

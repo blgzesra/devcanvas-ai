@@ -102,14 +102,14 @@ export default function MarkdownGeneratorPage() {
 
         </div>
 
-<ToolResult
-  title="Generated Regex"
-  content={
-    result ||
-    "Your AI-generated regular expression will appear here."
-  }
-  hasResult={!!result}
-/>
+        <ToolResult
+          title="Improved Markdown"
+          content={
+            result ||
+            "Your AI-improved markdown will appear here."
+          }
+          hasResult={!!result}
+        />
 
       </div>
     </main>

@@ -96,14 +96,14 @@ export default function FakeDataGeneratorPage() {
 
         </div>
 
-      <ToolResult
-  title="Generated Regex"
-  content={
-    result ||
-    "Your AI-generated regular expression will appear here."
-  }
-  hasResult={!!result}
-/>
+        <ToolResult
+          title="Generated Fake Data"
+          content={
+            result ||
+            "Your AI-generated fake data will appear here."
+          }
+          hasResult={!!result}
+        />
 
       </div>
     </main>
