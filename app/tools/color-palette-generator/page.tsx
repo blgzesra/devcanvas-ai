@@ -2,13 +2,34 @@
 
 import { useState } from "react";
 
+import ColorPaletteResult from "@/components/tools/ColorPaletteResult";
 import ToolHeader from "@/components/tools/ToolHeader";
 import ToolResult from "@/components/tools/ToolResult";
+
+// Matches lines like "Primary: #1E40AF" or "**Accent** - #f59e0b".
+const PALETTE_COLOR_PATTERN =
+  /\b(Primary|Secondary|Accent|Background|Text)\b[^#\n]*(#(?:[0-9a-f]{6}|[0-9a-f]{3}))\b/gi;
+
+function parsePalette(text: string) {
+  const colors = new Map<string, string>();
+
+  for (const [, name, hex] of text.matchAll(PALETTE_COLOR_PATTERN)) {
+    const label = name[0].toUpperCase() + name.slice(1).toLowerCase();
+
+    if (!colors.has(label)) {
+      colors.set(label, hex.toUpperCase());
+    }
+  }
+
+  return [...colors].map(([name, hex]) => ({ name, hex }));
+}
 
 export default function ColorPaletteGeneratorPage() {
   const [theme, setTheme] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const colors = parsePalette(result);
 
   const exampleTheme = "Fintech Startup";
 
@@ -95,14 +116,18 @@ className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duratio
 
         </div>
 
-        <ToolResult
-          title="Generated Palette"
-          content={
-            result ||
-            "Your AI-generated color palette will appear here."
-          }
-          hasResult={!!result}
-        />
+        {colors.length > 0 ? (
+          <ColorPaletteResult colors={colors} />
+        ) : (
+          <ToolResult
+            title="Generated Palette"
+            content={
+              result ||
+              "Your AI-generated color palette will appear here."
+            }
+            hasResult={!!result}
+          />
+        )}
 
       </div>
     </main>
