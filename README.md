@@ -126,17 +126,10 @@ docs/screenshots/         # README images
 
 ## Screenshots
 
-| Dashboard | JSON Explain |
+| | |
 |---|---|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![JSON Explain](docs/screenshots/json-explain.png) |
-
-| Regex Generator | Color Palette Generator |
-|---|---|
-| ![Regex Generator](docs/screenshots/regex-generator.png) | ![Color Palette Generator](docs/screenshots/color-palette.png) |
-
-| API Mock Generator |
-|---|
-| ![API Mock Generator](docs/screenshots/api-mock.png) |
+| ![Landing page](docs/screenshots/landing.png)<br>**Landing page** | ![Featured tools](docs/screenshots/featured-tools.png)<br>**Featured tools** |
+| ![Color Palette Generator](docs/screenshots/color-palette.png)<br>**Color Palette Generator** | ![Fake Data Generator](docs/screenshots/fake-data-generator.png)<br>**Fake Data Generator** |
 
 ## Known Limitations
 
