@@ -59,7 +59,7 @@ flowchart LR
 
 ## API Routes
 
-All routes accept `POST` with a JSON body, use `temperature: 0.3`, and respond with `{ result: string, truncated: boolean }` or `{ error: string }`. `truncated` is `true` when the model stopped at the `max_tokens` limit (`finish_reason: "length"`), and the UI then shows an "Output was cut off" notice.
+All routes accept `POST` with a JSON body, use `temperature: 0.3`, and respond with `{ result: string, truncated: boolean }` or `{ error: string }`. `truncated` is `true` when the model stopped at the `max_tokens` limit (`finish_reason: "length"`), and the UI then shows an "Output was cut off" notice. If the model hits the limit before producing any text, `result` is empty and the UI asks for a shorter request instead.
 
 | Endpoint | Body | Purpose | `max_tokens` |
 |---|---|---|---|

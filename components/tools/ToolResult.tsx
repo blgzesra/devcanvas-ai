@@ -19,6 +19,10 @@ export default function ToolResult({
 }: ToolResultProps) {
   const [copied, setCopied] = useState(false);
 
+  // The API returns an empty result with truncated: true when the model used
+  // its whole token budget before producing any answer.
+  const truncatedWithoutAnswer = truncated && !hasResult;
+
   async function handleCopy() {
     if (!hasResult) return;
 
@@ -56,10 +60,12 @@ export default function ToolResult({
       </div>
 
       <div className="min-h-[220px] whitespace-pre-wrap rounded-xl bg-[#0A0A0A] p-5 text-zinc-300">
-        {content}
+        {truncatedWithoutAnswer
+          ? "The model hit its length limit before producing an answer. Try a shorter request."
+          : content}
       </div>
 
-      {truncated && <TruncatedNotice />}
+      {truncated && hasResult && <TruncatedNotice />}
     </div>
   );
 }

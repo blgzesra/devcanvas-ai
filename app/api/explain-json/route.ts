@@ -39,10 +39,12 @@ export async function POST(req: Request) {
     });
 
     const choice = response.choices[0];
+    const result = choice?.message?.content;
+    const truncated = choice?.finish_reason === "length";
 
     return NextResponse.json({
-      result: choice?.message?.content ?? "No response.",
-      truncated: choice?.finish_reason === "length",
+      result: result || (truncated ? "" : "No response."),
+      truncated,
     });
   } catch (error) {
     console.error(error);

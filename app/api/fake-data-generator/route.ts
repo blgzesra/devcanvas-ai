@@ -52,9 +52,11 @@ export async function POST(req: Request) {
           ? content
           : "";
 
+    const truncated = choice?.finish_reason === "length";
+
     return NextResponse.json({
-      result: result || "No fake data generated.",
-      truncated: choice?.finish_reason === "length",
+      result: result || (truncated ? "" : "No fake data generated."),
+      truncated,
     });
   } catch (error) {
     console.error(error);
