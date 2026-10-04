@@ -11,7 +11,7 @@ export default function DashboardPage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [favorites] = useState<string[]>(() => {
+  const [favorites, setFavorites] = useState<string[]>(() => {
     if (typeof window === "undefined") {
       return [];
     }
@@ -22,6 +22,20 @@ export default function DashboardPage() {
       return [];
     }
   });
+
+  function toggleFavorite(title: string) {
+    const updated = favorites.includes(title)
+      ? favorites.filter((item) => item !== title)
+      : [...favorites, title];
+
+    setFavorites(updated);
+
+    try {
+      localStorage.setItem("favorite-tools", JSON.stringify(updated));
+    } catch {
+      // Storage may be unavailable (e.g. private mode); keep in-memory state.
+    }
+  }
 
   const categories = [
     "All",
@@ -139,6 +153,8 @@ export default function DashboardPage() {
                 description={tool.description}
                 icon={tool.icon}
                 href={tool.href}
+                isFavorite={favorites.includes(tool.title)}
+                onToggleFavorite={() => toggleFavorite(tool.title)}
               />
             ))}
           </div>

@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 
 type Props = {
   title: string;
   description: string;
   icon: string;
   href: string;
+  isFavorite: boolean;
+  onToggleFavorite: () => void;
 };
 
 export default function ToolCard({
@@ -15,42 +16,14 @@ export default function ToolCard({
   description,
   icon,
   href,
+  isFavorite,
+  onToggleFavorite,
 }: Props) {
-  const [favorite, setFavorite] = useState<boolean>(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-
-    try {
-      const favorites: string[] = JSON.parse(
-        localStorage.getItem("favorite-tools") || "[]"
-      );
-
-      return favorites.includes(title);
-    } catch {
-      return false;
-    }
-  });
-
   function toggleFavorite(
     e: React.MouseEvent<HTMLButtonElement>
   ) {
     e.preventDefault();
-
-    const favorites: string[] = JSON.parse(
-      localStorage.getItem("favorite-tools") || "[]"
-    );
-
-    const updated = favorites.includes(title)
-      ? favorites.filter((item) => item !== title)
-      : [...favorites, title];
-
-    localStorage.setItem(
-      "favorite-tools",
-      JSON.stringify(updated)
-    );
-
-    setFavorite(updated.includes(title));
+    onToggleFavorite();
   }
 
   return (
@@ -62,7 +35,7 @@ export default function ToolCard({
         onClick={toggleFavorite}
         className="absolute right-5 top-5 text-xl transition hover:scale-110"
       >
-        {favorite ? "⭐" : "☆"}
+        {isFavorite ? "⭐" : "☆"}
       </button>
 
       <div className="text-4xl">
