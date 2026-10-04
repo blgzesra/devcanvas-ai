@@ -1,6 +1,6 @@
 {
   "name": "devcanvas-ai",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "AI-powered developer toolkit with eight tools (JSON explainer, regex, README and commit message generators, mock data and more), built with Next.js and OpenRouter.",
   "license": "MIT",
