@@ -14,7 +14,7 @@ export default function Hero() {
 
       <p className="mt-6 max-w-2xl text-lg text-zinc-400 md:text-xl">
         Modern AI tools for developers. Generate regex, explain JSON,
-        create README files, build Tailwind classes and more.
+        create README files, write commit messages and more.
       </p>
 
       <div className="mt-10 flex flex-wrap justify-center gap-4">
