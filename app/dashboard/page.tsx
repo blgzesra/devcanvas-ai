@@ -76,9 +76,12 @@ export default function DashboardPage() {
         <div className="mt-8 flex flex-wrap gap-3">
 
           <button
-            onClick={() => setFavoritesOnly(false)}
+            onClick={() => {
+              setFavoritesOnly(false);
+              setSelectedCategory("All");
+            }}
             className={`rounded-full px-5 py-2 text-sm transition ${
-              !favoritesOnly
+              !favoritesOnly && selectedCategory === "All"
                 ? "bg-blue-600 text-white"
                 : "border border-zinc-700 text-zinc-400 hover:bg-zinc-800"
             }`}
@@ -87,7 +90,10 @@ export default function DashboardPage() {
           </button>
 
           <button
-            onClick={() => setFavoritesOnly(true)}
+            onClick={() => {
+              setFavoritesOnly(true);
+              setSelectedCategory("All");
+            }}
             className={`rounded-full px-5 py-2 text-sm transition ${
               favoritesOnly
                 ? "bg-yellow-500 text-black"
@@ -102,7 +108,10 @@ export default function DashboardPage() {
             .map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => {
+                  setFavoritesOnly(false);
+                  setSelectedCategory(category);
+                }}
                 className={`rounded-full px-5 py-2 text-sm transition ${
                   selectedCategory === category
                   && !favoritesOnly
