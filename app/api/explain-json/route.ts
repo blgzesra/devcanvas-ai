@@ -41,21 +41,12 @@ export async function POST(req: Request) {
     return NextResponse.json({
       result: response.choices[0]?.message?.content ?? "No response.",
     });
-  } catch (error: unknown) {
-    console.error("OPENROUTER ERROR:", error);
-
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : typeof error === "object" && error !== null && "message" in error
-          ? String((error as { message?: unknown }).message)
-          : typeof error === "string"
-            ? error
-            : JSON.stringify(error, null, 2);
+  } catch (error) {
+    console.error(error);
 
     return NextResponse.json(
       {
-        error: errorMessage,
+        error: "Something went wrong.",
       },
       {
         status: 500,
