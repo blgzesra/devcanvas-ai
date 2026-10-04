@@ -145,7 +145,7 @@ docs/screenshots/         # README images
 - **Plain-text output:** results are not rendered as Markdown and code is not syntax-highlighted (palettes are the exception).
 - **Model varies per request:** `openrouter/free` sends each request to one of the currently available free models, so output quality and style can change between requests.
 - **Reasoning can use up the token budget:** some free models spend part or all of `max_tokens` on reasoning, which can produce a cut-off or empty answer. The UI shows an explicit message in both cases instead of failing silently.
-- **Shared daily quota on the live demo:** OpenRouter limits free models per API key (20 requests/minute and a small daily cap), and every demo visitor shares the same key, so the demo may return errors once the daily quota is used up.
+- **Shared daily quota on the live demo:** OpenRouter limits free models per API key (20 requests/minute and a small daily cap), and every demo visitor shares the same key, so the demo may return errors once the daily quota is used up. Rate-limit responses (HTTP 429) show "The free AI model is busy right now. Please try again in a minute."; other errors show a generic message.
 - **No rate limiting or authentication** on the API routes.
 - **Favorites are per-browser**, stored in `localStorage`.
 - **No automated tests** yet.
