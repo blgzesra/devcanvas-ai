@@ -1,40 +1,39 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import ToolCard from "@/components/dashboard/ToolCard";
 
+import {
+  getFavoritesServerSnapshot,
+  getFavoritesSnapshot,
+  parseFavorites,
+  saveFavorites,
+  subscribeFavorites,
+} from "@/lib/favorites";
 import { tools } from "@/lib/tools";
 
 export default function DashboardPage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-
-    try {
-      return JSON.parse(localStorage.getItem("favorite-tools") || "[]");
-    } catch {
-      return [];
-    }
-  });
+  const favoritesRaw = useSyncExternalStore(
+    subscribeFavorites,
+    getFavoritesSnapshot,
+    getFavoritesServerSnapshot
+  );
+  const favorites = useMemo(
+    () => parseFavorites(favoritesRaw),
+    [favoritesRaw]
+  );
 
   function toggleFavorite(title: string) {
     const updated = favorites.includes(title)
       ? favorites.filter((item) => item !== title)
       : [...favorites, title];
 
-    setFavorites(updated);
-
-    try {
-      localStorage.setItem("favorite-tools", JSON.stringify(updated));
-    } catch {
-      // Storage may be unavailable (e.g. private mode); keep in-memory state.
-    }
+    saveFavorites(updated);
   }
 
   const categories = [
