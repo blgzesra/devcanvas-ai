@@ -66,11 +66,11 @@ All routes accept `POST` with a JSON body, use `temperature: 0.3`, and respond w
 | Endpoint | Body | Purpose | `max_tokens` |
 |---|---|---|---|
 | `/api/explain-json` | `{ json }` | Explain JSON in beginner-friendly terms | 800 |
-| `/api/regex-generator` | `{ prompt }` | Regex + brief explanation | 300 |
+| `/api/regex-generator` | `{ prompt }` | Regex + brief explanation | 800 |
 | `/api/markdown-generator` | `{ markdown }` | Improve Markdown clarity and structure | 1000 |
 | `/api/readme-generator` | `{ description }` | README from a project description | 1500 |
-| `/api/git-commit-generator` | `{ changes }` | Conventional Commit message | 300 |
-| `/api/color-palette-generator` | `{ theme }` | 5-color palette as `Name: #HEX` pairs | 300 |
+| `/api/git-commit-generator` | `{ changes }` | Conventional Commit message | 800 |
+| `/api/color-palette-generator` | `{ theme }` | 5-color palette as `Name: #HEX` pairs | 800 |
 | `/api/fake-data-generator` | `{ prompt }` | Mock data as JSON | 800 |
 | `/api/api-mock-generator` | `{ prompt }` | Mock API response as JSON | 800 |
 
@@ -141,7 +141,7 @@ docs/screenshots/         # README images
 ## Known Limitations
 
 - **No streaming:** responses arrive in one piece after the model finishes.
-- **Output length is capped** per tool (300–1500 `max_tokens`); when a response hits the cap, the UI flags it as cut off rather than silently truncating.
+- **Output length is capped** per tool (800–1500 `max_tokens`); when a response hits the cap, the UI flags it as cut off rather than silently truncating.
 - **Plain-text output:** results are not rendered as Markdown and code is not syntax-highlighted (palettes are the exception).
 - **Free model tier:** `openrouter/free` can be rate-limited and output quality varies between requests.
 - **No rate limiting or authentication** on the API routes.

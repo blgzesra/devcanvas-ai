@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const response = await client.chat.completions.create({
       model: AI_MODEL,
       temperature: 0.3,
-      max_tokens: 300,
+      max_tokens: 800,
       messages: [
         {
           role: "system",
