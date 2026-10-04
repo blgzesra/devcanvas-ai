@@ -39,7 +39,8 @@ export async function POST(req: Request) {
       ],
     });
 
-    const content = response.choices[0]?.message?.content;
+    const choice = response.choices[0];
+    const content = choice?.message?.content;
     const result =
       Array.isArray(content)
         ? content
@@ -51,7 +52,10 @@ export async function POST(req: Request) {
           ? content
           : "";
 
-    return NextResponse.json({ result: result || "No palette generated." });
+    return NextResponse.json({
+      result: result || "No palette generated.",
+      truncated: choice?.finish_reason === "length",
+    });
   } catch (error) {
     console.error(error);
 

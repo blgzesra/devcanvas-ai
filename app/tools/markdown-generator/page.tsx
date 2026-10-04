@@ -9,6 +9,7 @@ export default function MarkdownGeneratorPage() {
   const [markdown, setMarkdown] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [truncated, setTruncated] = useState(false);
 
   const exampleMarkdown = `# DevCanvas AI
 
@@ -19,6 +20,8 @@ export default function MarkdownGeneratorPage() {
 - Markdown Generator`;
 
   async function handleGenerate() {
+    setTruncated(false);
+
     if (!markdown.trim()) {
       setResult("⚠️ Please enter some markdown.");
       return;
@@ -43,6 +46,7 @@ export default function MarkdownGeneratorPage() {
         setResult(data.error || "Something went wrong.");
       } else {
         setResult(data.result);
+        setTruncated(data.truncated === true);
       }
     } catch {
       setResult("❌ Failed to connect to AI.");
@@ -54,6 +58,7 @@ export default function MarkdownGeneratorPage() {
   function handleClear() {
     setMarkdown("");
     setResult("");
+    setTruncated(false);
   }
 
   return (
@@ -109,6 +114,7 @@ export default function MarkdownGeneratorPage() {
             "Your AI-improved markdown will appear here."
           }
           hasResult={!!result}
+          truncated={truncated}
         />
 
       </div>

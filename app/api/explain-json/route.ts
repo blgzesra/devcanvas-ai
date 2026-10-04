@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const response = await client.chat.completions.create({
       model: AI_MODEL,
       temperature: 0.3,
-      max_tokens: 300,
+      max_tokens: 800,
       messages: [
         {
           role: "system",
@@ -38,8 +38,11 @@ export async function POST(req: Request) {
       ],
     });
 
+    const choice = response.choices[0];
+
     return NextResponse.json({
-      result: response.choices[0]?.message?.content ?? "No response.",
+      result: choice?.message?.content ?? "No response.",
+      truncated: choice?.finish_reason === "length",
     });
   } catch (error) {
     console.error(error);

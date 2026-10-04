@@ -9,6 +9,7 @@ export default function JsonExplainPage() {
   const [jsonInput, setJsonInput] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [truncated, setTruncated] = useState(false);
 
   const exampleJson = `{
   "name": "Esra",
@@ -22,6 +23,8 @@ export default function JsonExplainPage() {
 }`;
 
   async function handleExplain() {
+    setTruncated(false);
+
     if (!jsonInput.trim()) return;
 
     try {
@@ -50,6 +53,7 @@ export default function JsonExplainPage() {
         setResponse(data.error || "Something went wrong.");
       } else {
         setResponse(data.result);
+        setTruncated(data.truncated === true);
       }
     } catch {
       setResponse("❌ Failed to connect to AI.");
@@ -61,6 +65,7 @@ export default function JsonExplainPage() {
   function handleClear() {
     setJsonInput("");
     setResponse("");
+    setTruncated(false);
   }
 
   function handleFileUpload(
@@ -143,6 +148,7 @@ export default function JsonExplainPage() {
             "Your AI explanation will appear here."
           }
           hasResult={!!response}
+          truncated={truncated}
         />
 
       </div>

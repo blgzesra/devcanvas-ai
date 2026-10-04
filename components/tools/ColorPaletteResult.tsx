@@ -1,5 +1,7 @@
 "use client";
 
+import TruncatedNotice from "@/components/tools/TruncatedNotice";
+
 type PaletteColor = {
   name: string;
   hex: string;
@@ -7,10 +9,12 @@ type PaletteColor = {
 
 type Props = {
   colors: PaletteColor[];
+  truncated?: boolean;
 };
 
 export default function ColorPaletteResult({
   colors,
+  truncated = false,
 }: Props) {
   return (
     <div className="mt-10 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -62,6 +66,8 @@ export default function ColorPaletteResult({
           ))}
         </div>
       )}
+
+      {truncated && <TruncatedNotice />}
     </div>
   );
 }

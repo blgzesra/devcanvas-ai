@@ -9,12 +9,15 @@ export default function GitCommitGeneratorPage() {
   const [changes, setChanges] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [truncated, setTruncated] = useState(false);
 
   const exampleChanges = `Added login page
 Fixed navbar responsiveness
 Updated README`;
 
   async function handleGenerate() {
+    setTruncated(false);
+
     if (!changes.trim()) {
       setResult("⚠️ Please describe your changes.");
       return;
@@ -39,6 +42,7 @@ Updated README`;
         setResult(data.error || "Something went wrong.");
       } else {
         setResult(data.result);
+        setTruncated(data.truncated === true);
       }
     } catch {
       setResult("❌ Failed to connect to AI.");
@@ -50,6 +54,7 @@ Updated README`;
   function handleClear() {
     setChanges("");
     setResult("");
+    setTruncated(false);
   }
 
   return (
@@ -105,6 +110,7 @@ Updated README`;
             "Your AI-generated commit message will appear here."
           }
           hasResult={!!result}
+          truncated={truncated}
         />
 
       </div>

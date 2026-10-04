@@ -9,11 +9,14 @@ export default function ReadmeGeneratorPage() {
   const [description, setDescription] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [truncated, setTruncated] = useState(false);
 
   const exampleDescription =
     "An AI-powered developer toolkit built with Next.js, React and Tailwind CSS.";
 
   async function handleGenerate() {
+    setTruncated(false);
+
     if (!description.trim()) {
       setResult("⚠️ Please enter a repository description.");
       return;
@@ -38,6 +41,7 @@ export default function ReadmeGeneratorPage() {
         setResult(data.error || "Something went wrong.");
       } else {
         setResult(data.result);
+        setTruncated(data.truncated === true);
       }
     } catch {
       setResult("❌ Failed to connect to AI.");
@@ -49,6 +53,7 @@ export default function ReadmeGeneratorPage() {
   function handleClear() {
     setDescription("");
     setResult("");
+    setTruncated(false);
   }
 
   return (
@@ -104,6 +109,7 @@ export default function ReadmeGeneratorPage() {
             "Your AI-generated README will appear here."
           }
           hasResult={!!result}
+          truncated={truncated}
         />
 
       </div>

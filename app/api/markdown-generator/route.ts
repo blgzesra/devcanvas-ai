@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const response = await client.chat.completions.create({
       model: AI_MODEL,
       temperature: 0.3,
-      max_tokens: 300,
+      max_tokens: 1000,
       messages: [
         {
           role: "system",
@@ -38,7 +38,8 @@ export async function POST(req: Request) {
       ],
     });
 
-    const content = response.choices[0]?.message?.content;
+    const choice = response.choices[0];
+    const content = choice?.message?.content;
     const result =
       Array.isArray(content)
         ? content
@@ -50,7 +51,10 @@ export async function POST(req: Request) {
           ? content
           : "";
 
-    return NextResponse.json({ result: result || "No markdown generated." });
+    return NextResponse.json({
+      result: result || "No markdown generated.",
+      truncated: choice?.finish_reason === "length",
+    });
   } catch (error) {
     console.error(error);
 

@@ -9,10 +9,13 @@ export default function FakeDataGeneratorPage() {
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [truncated, setTruncated] = useState(false);
 
   const examplePrompt = "Generate 5 fake users";
 
   async function handleGenerate() {
+    setTruncated(false);
+
     if (!prompt.trim()) {
       setResult("⚠️ Please describe the fake data you need.");
       return;
@@ -37,6 +40,7 @@ export default function FakeDataGeneratorPage() {
         setResult(data.error || "Something went wrong.");
       } else {
         setResult(data.result);
+        setTruncated(data.truncated === true);
       }
     } catch {
       setResult("❌ Failed to connect to AI.");
@@ -48,6 +52,7 @@ export default function FakeDataGeneratorPage() {
   function handleClear() {
     setPrompt("");
     setResult("");
+    setTruncated(false);
   }
 
   return (
@@ -103,6 +108,7 @@ export default function FakeDataGeneratorPage() {
             "Your AI-generated fake data will appear here."
           }
           hasResult={!!result}
+          truncated={truncated}
         />
 
       </div>

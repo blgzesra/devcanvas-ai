@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 
+import TruncatedNotice from "@/components/tools/TruncatedNotice";
+
 type ToolResultProps = {
   title: string;
   content: string;
   hasResult: boolean;
+  truncated?: boolean;
 };
 
 export default function ToolResult({
   title,
   content,
   hasResult,
+  truncated = false,
 }: ToolResultProps) {
   const [copied, setCopied] = useState(false);
 
@@ -54,6 +58,8 @@ export default function ToolResult({
       <div className="min-h-[220px] whitespace-pre-wrap rounded-xl bg-[#0A0A0A] p-5 text-zinc-300">
         {content}
       </div>
+
+      {truncated && <TruncatedNotice />}
     </div>
   );
 }

@@ -28,12 +28,15 @@ export default function ColorPaletteGeneratorPage() {
   const [theme, setTheme] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [truncated, setTruncated] = useState(false);
 
   const colors = parsePalette(result);
 
   const exampleTheme = "Fintech Startup";
 
   async function handleGenerate() {
+    setTruncated(false);
+
     if (!theme.trim()) {
       setResult("⚠️ Please enter a theme.");
       return;
@@ -58,6 +61,7 @@ export default function ColorPaletteGeneratorPage() {
         setResult(data.error || "Something went wrong.");
       } else {
         setResult(data.result);
+        setTruncated(data.truncated === true);
       }
     } catch {
       setResult("❌ Failed to connect to AI.");
@@ -69,6 +73,7 @@ export default function ColorPaletteGeneratorPage() {
   function handleClear() {
     setTheme("");
     setResult("");
+    setTruncated(false);
   }
 
   return (
@@ -117,7 +122,7 @@ className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duratio
         </div>
 
         {colors.length > 0 ? (
-          <ColorPaletteResult colors={colors} />
+          <ColorPaletteResult colors={colors} truncated={truncated} />
         ) : (
           <ToolResult
             title="Generated Palette"
@@ -126,6 +131,7 @@ className="rounded-xl bg-blue-600 px-6 py-3 font-semibold transition-all duratio
               "Your AI-generated color palette will appear here."
             }
             hasResult={!!result}
+            truncated={truncated}
           />
         )}
 
