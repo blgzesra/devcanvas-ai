@@ -2,11 +2,23 @@
   "name": "devcanvas-ai",
   "version": "0.1.0",
   "private": true,
+  "description": "AI-powered developer toolkit with eight tools (JSON explainer, regex, README and commit message generators, mock data and more), built with Next.js and OpenRouter.",
+  "license": "MIT",
+  "author": "Esra Bilgiz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blgzesra/devcanvas-ai.git"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "16.2.12",
